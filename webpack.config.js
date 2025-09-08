@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.ts',
   mode: 'development',
   devtool: 'source-map',
   module: {
@@ -10,6 +10,14 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       },
     ],
   },
@@ -23,12 +31,12 @@ module.exports = {
   },
   devServer: {
     static: {
-        directory: path.resolve(__dirname, 'public'),
+      directory: path.resolve(__dirname, 'public'),
     },
     port: 8080,
     open: true,
     hot: true,
     watchFiles: ['src/**/*'],
     liveReload: true,
-  }
+  },
 };
