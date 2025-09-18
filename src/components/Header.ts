@@ -1,4 +1,6 @@
-const Header = () => {
+import { HeaderUser } from "../types/Header";
+
+const Header = (data: HeaderUser) => {
   return `
         <header class="header flex">
             <a class="header__logo" href="/">
@@ -31,9 +33,9 @@ const Header = () => {
             <button class="header__user">
                 <img
                 class="header__user__img"
-                src="img/user.jpg"
+                src="${data.avatar}"
                 alt="Изображение пользователя"
-                /><span class="header__user__text">Tatiana L.</span
+                /><span class="header__user__text">${data.name}</span
                 ><svg
                 class="header__user__svg"
                 width="6"

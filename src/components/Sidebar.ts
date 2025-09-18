@@ -1,4 +1,13 @@
-const Sidebar = () => {
+import { SidebarData } from "../types/Sidebar";
+
+const Sidebar = (playlists: SidebarData) => {
+    const plalistsHTML = playlists.lists.map((playlist) => `
+        <li class="aside__item">
+            <button class="aside__btn">${playlist.label}</button>
+        </li>
+    `).join('')
+
+
     return `
         <aside class="aside">
             <h2 class="aside__h2 visually-hidden">Левая панель навигации</h2>
@@ -95,27 +104,7 @@ const Sidebar = () => {
                 <li class="aside__item">
                 <button class="aside__btn">Любимые песни</button>
                 </li>
-                <li class="aside__item">
-                <button class="aside__btn">Плейлист #1</button>
-                </li>
-                <li class="aside__item">
-                <button class="aside__btn">Плейлист #2</button>
-                </li>
-                <li class="aside__item">
-                <button class="aside__btn">Плейлист #3</button>
-                </li>
-                <li class="aside__item">
-                <button class="aside__btn">Плейлист #4</button>
-                </li>
-                <li class="aside__item">
-                <button class="aside__btn">Плейлист #5</button>
-                </li>
-                <li class="aside__item">
-                <button class="aside__btn">Плейлист #6</button>
-                </li>
-                <li class="aside__item">
-                <button class="aside__btn">Плейлист #7</button>
-                </li>
+                ${plalistsHTML}
             </ul>
             </nav>
         </aside>

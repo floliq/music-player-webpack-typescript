@@ -1,16 +1,20 @@
+import { generatePlayerState } from "../mocks";
+
 const Player = () => {
+    const playerState = generatePlayerState();
+    
     return `
         <footer class="footer">
         <div class="player flex">
             <div class="player__track-name flex">
             <img
                 class="player__track__img"
-                src="img/tracks%20(1).jpg"
-                alt="Histoire Sans Nom - Ludovico Einaudi, Czech National Symphony Orchestra"
+                src="${playerState.current.image}"
+                alt="${playerState.current.title}"
             />
             <div class="player__track-name__content">
                 <div class="flex player__name__header">
-                <h3 class="player__track__h3">Histoire Sans Nom</h3>
+                <h3 class="player__track__h3">${playerState.current.title}</h3>
                 <button class="player__track__like">
                     <svg
                     width="22"
@@ -27,7 +31,7 @@ const Player = () => {
                 </button>
                 </div>
                 <p class="player__track__author">
-                Ludovico Einaudi, Czech National Symphony Orchestra
+                ${playerState.current.artist}
                 </p>
             </div>
             </div>
@@ -121,9 +125,9 @@ const Player = () => {
                 </button>
             </div>
             <div class="player__controls__footer">
-                <span class="player__time-start">0:26</span>
+                <span class="player__time-start">${playerState.timeStartSec}</span>
                 <div class="player__range-play" id="range-play"></div>
-                <span class="player__time-end">0:26</span>
+                <span class="player__time-end">${playerState.timeStartSec}</span>
             </div>
             </div>
             <div class="player__value">
