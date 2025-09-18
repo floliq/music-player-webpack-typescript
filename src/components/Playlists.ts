@@ -1,8 +1,14 @@
-import { PlaylistsModalData } from "../types/Playlist";
+import { PlaylistsModalData } from '../types/Playlist';
+import { createDOMElement } from '../utils/createDomElement';
 
-const Playlists = (playlists: PlaylistsModalData) => {
-  const playlistsHTML = playlists.items.map(
-    (playlist) => `
+class Playlists {
+  private element: HTMLElement | null = null;
+
+  constructor(private playlists: PlaylistsModalData) {}
+
+  getTemplate(): string {
+    const playlistsHTML = this.playlists.items.map(
+      (playlist) => `
         <div class="playlists-modal__playlist">
             <img
             src="${playlist.image}"
@@ -13,8 +19,9 @@ const Playlists = (playlists: PlaylistsModalData) => {
             <div class="playlists-modal__playlist__info">${playlist.tracksCount}</div>
         </div>
     `
-  );
-  return `
+    );
+
+    return `
         <div class="playlists-modal">
         <div class="playlists-modal__title">Добавить в плейлист</div>
         <div class="playlists-modal__playlist_content">
@@ -25,6 +32,16 @@ const Playlists = (playlists: PlaylistsModalData) => {
         </div>
     </div>
     `;
-};
+  }
+
+  getElement(): HTMLElement {
+    this.element ??= createDOMElement(this.getTemplate());
+    return this.element;
+  }
+
+  removeElement(): void {
+    this.element = null;
+  }
+}
 
 export default Playlists;

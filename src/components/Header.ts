@@ -1,7 +1,13 @@
-import { HeaderUser } from "../types/Header";
+import { HeaderUser } from '../types/Header';
+import { createDOMElement } from '../utils/createDomElement';
 
-const Header = (data: HeaderUser) => {
-  return `
+class Header {
+  private element: HTMLElement | null = null;
+
+  constructor(private userData: HeaderUser) {}
+
+  getTemplate() {
+    return `
         <header class="header flex">
             <a class="header__logo" href="/">
                 <svg
@@ -33,9 +39,9 @@ const Header = (data: HeaderUser) => {
             <button class="header__user">
                 <img
                 class="header__user__img"
-                src="${data.avatar}"
+                src="${this.userData.avatar}"
                 alt="Изображение пользователя"
-                /><span class="header__user__text">${data.name}</span
+                /><span class="header__user__text">${this.userData.name}</span
                 ><svg
                 class="header__user__svg"
                 width="6"
@@ -54,6 +60,16 @@ const Header = (data: HeaderUser) => {
             </button>
         </header>
     `;
-};
+  }
+
+    getElement(): HTMLElement {
+      this.element ??= createDOMElement(this.getTemplate());
+      return this.element;
+    }
+  
+    removeElement(): void {
+      this.element = null;
+    }
+}
 
 export default Header;

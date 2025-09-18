@@ -1,13 +1,18 @@
+import { Track, TrackData } from '../../types/Track';
+import { createDOMElement } from '../../utils/createDomElement';
+import TrackItem from './TrackItem';
 
-import { Track, TrackData } from "../../types/Track";
-import TrackItem from "./TrackItem";
+class TrackList {
+  private element: HTMLElement | null = null;
 
-const TrackList = (tracks: TrackData) => {
+  constructor(private tracks: TrackData) {}
 
-  const tracksHTML = tracks.tracks.map((track: Track) => TrackItem(track))
+  getTemplate() {
+    const tracksHTML = this.tracks.tracks.map((track: Track) =>
+      new TrackItem(track).getTemplate()
+    );
 
-
-  return `
+    return `
     <main class="main">
         <section
           class="tracks section tabs-content section--active"
@@ -271,6 +276,16 @@ const TrackList = (tracks: TrackData) => {
         </section>
       </main>
     `;
-};
+  }
+
+  getElement(): HTMLElement {
+    this.element ??= createDOMElement(this.getTemplate());
+    return this.element;
+  }
+
+  removeElement(): void {
+    this.element = null;
+  }
+}
 
 export default TrackList;

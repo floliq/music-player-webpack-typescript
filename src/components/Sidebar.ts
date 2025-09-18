@@ -1,12 +1,21 @@
-import { SidebarData } from "../types/Sidebar";
+import { SidebarData } from '../types/Sidebar';
+import { createDOMElement } from '../utils/createDomElement';
 
-const Sidebar = (playlists: SidebarData) => {
-    const plalistsHTML = playlists.lists.map((playlist) => `
+class Sidebar {
+  private element: HTMLElement | null = null;
+
+  constructor(private playlists: SidebarData) {}
+
+  getTemplate(): string {
+    const plalistsHTML = this.playlists.lists
+      .map(
+        (playlist) => `
         <li class="aside__item">
             <button class="aside__btn">${playlist.label}</button>
         </li>
-    `).join('')
-
+    `
+      )
+      .join('');
 
     return `
         <aside class="aside">
@@ -108,7 +117,17 @@ const Sidebar = (playlists: SidebarData) => {
             </ul>
             </nav>
         </aside>
-    `
+    `;
+  }
+
+  getElement(): HTMLElement {
+    this.element ??= createDOMElement(this.getTemplate());
+    return this.element;
+  }
+
+  removeElement(): void {
+    this.element = null;
+  }
 }
 
 export default Sidebar;
