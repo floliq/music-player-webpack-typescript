@@ -1,10 +1,10 @@
 import { SidebarData } from '../types/Sidebar';
-import { createDOMElement } from '../utils/createDomElement';
+import Component from '../core/Component';
 
-class Sidebar {
-  private element: HTMLElement | null = null;
-
-  constructor(private playlists: SidebarData) {}
+class Sidebar extends Component<SidebarData> {
+  constructor(private playlists: SidebarData) {
+    super(playlists);
+  }
 
   getTemplate(): string {
     const plalistsHTML = this.playlists.lists
@@ -118,15 +118,6 @@ class Sidebar {
             </nav>
         </aside>
     `;
-  }
-
-  getElement(): HTMLElement {
-    this.element ??= createDOMElement(this.getTemplate());
-    return this.element;
-  }
-
-  removeElement(): void {
-    this.element = null;
   }
 }
 

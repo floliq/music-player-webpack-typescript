@@ -1,11 +1,11 @@
 import { Track } from '../../types/Track';
-import { createDOMElement } from '../../utils/createDomElement';
-import { getAddedDate, getTrackDuration } from '../../utils/trackFormatter';
+import { getAddedDate, getTrackDuration } from '../../core/trackFormatter';
+import Component from '../../core/Component';
 
-class TrackItem {
-  private element: HTMLElement | null = null;
-
-  constructor(private item: Track) {}
+class TrackItem extends Component<Track> {
+  constructor(private item: Track) {
+    super(item);
+  }
 
   getTemplate() {
     return `
@@ -71,15 +71,6 @@ class TrackItem {
                 </div>
             </div>
         </li>`;
-  }
-
-  getElement(): HTMLElement {
-    this.element ??= createDOMElement(this.getTemplate());
-    return this.element;
-  }
-
-  removeElement(): void {
-    this.element = null;
   }
 }
 

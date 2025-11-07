@@ -1,11 +1,11 @@
 import { Track, TrackData } from '../../types/Track';
-import { createDOMElement } from '../../utils/createDomElement';
+import Component from '../../core/Component';
 import TrackItem from './TrackItem';
 
-class TrackList {
-  private element: HTMLElement | null = null;
-
-  constructor(private tracks: TrackData) {}
+class TrackList extends Component<TrackData> {
+  constructor(private tracks: TrackData) {
+    super(tracks);
+  }
 
   getTemplate() {
     const tracksHTML = this.tracks.tracks.map((track: Track) =>
@@ -276,15 +276,6 @@ class TrackList {
         </section>
       </main>
     `;
-  }
-
-  getElement(): HTMLElement {
-    this.element ??= createDOMElement(this.getTemplate());
-    return this.element;
-  }
-
-  removeElement(): void {
-    this.element = null;
   }
 }
 

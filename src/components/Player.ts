@@ -1,10 +1,11 @@
 import { PlayerState } from '../types/Player';
-import { createDOMElement } from '../utils/createDomElement';
+import Component from '../core/Component';
 
-class Player {
-  private element: HTMLElement | null = null;
+class Player extends Component<PlayerState> {;
 
-  constructor(private state: PlayerState) {}
+  constructor(private state: PlayerState) {
+    super(state);
+  }
 
   getTemplate() {
     return `
@@ -166,15 +167,6 @@ class Player {
             </div>
         </footer>
     `;
-  }
-
-  getElement(): HTMLElement {
-    this.element ??= createDOMElement(this.getTemplate());
-    return this.element;
-  }
-
-  removeElement(): void {
-    this.element = null;
   }
 }
 

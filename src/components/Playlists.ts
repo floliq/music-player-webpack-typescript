@@ -1,10 +1,10 @@
 import { PlaylistsModalData } from '../types/Playlist';
-import { createDOMElement } from '../utils/createDomElement';
+import Component from '../core/Component';
 
-class Playlists {
-  private element: HTMLElement | null = null;
-
-  constructor(private playlists: PlaylistsModalData) {}
+class Playlists extends Component<PlaylistsModalData> {
+  constructor(private playlists: PlaylistsModalData) {
+    super(playlists);
+  }
 
   getTemplate(): string {
     const playlistsHTML = this.playlists.items.map(
@@ -32,15 +32,6 @@ class Playlists {
         </div>
     </div>
     `;
-  }
-
-  getElement(): HTMLElement {
-    this.element ??= createDOMElement(this.getTemplate());
-    return this.element;
-  }
-
-  removeElement(): void {
-    this.element = null;
   }
 }
 

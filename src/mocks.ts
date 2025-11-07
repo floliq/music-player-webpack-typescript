@@ -2,7 +2,7 @@ import { PlaylistsModalData, PlaylistItem } from "./types/Playlist";
 import { SidebarData } from "./types/Sidebar";
 import { HeaderUser } from "./types/Header";
 import { PlayerState } from "./types/Player";
-import { getTrackDuration } from "./utils/trackFormatter";
+import { getTrackDuration } from "./core/trackFormatter";
 import { TrackData } from "./types/Track";
 
 const imageForPlaylist = (i: number): string => `img/tracks%20(${((i - 1) % 8) + 1}).jpg`;

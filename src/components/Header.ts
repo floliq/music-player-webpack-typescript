@@ -1,10 +1,10 @@
 import { HeaderUser } from '../types/Header';
-import { createDOMElement } from '../utils/createDomElement';
+import Component from '../core/Component';
 
-class Header {
-  private element: HTMLElement | null = null;
-
-  constructor(private userData: HeaderUser) {}
+class Header extends Component<HeaderUser> {
+  constructor(private userData: HeaderUser) {
+    super(userData);
+  }
 
   getTemplate() {
     return `
@@ -61,15 +61,6 @@ class Header {
         </header>
     `;
   }
-
-    getElement(): HTMLElement {
-      this.element ??= createDOMElement(this.getTemplate());
-      return this.element;
-    }
-  
-    removeElement(): void {
-      this.element = null;
-    }
 }
 
 export default Header;
