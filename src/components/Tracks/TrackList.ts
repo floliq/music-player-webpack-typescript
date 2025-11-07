@@ -1,6 +1,5 @@
-import { Track, TrackData } from '../../types/Track';
+import { TrackData } from '../../types/Track';
 import Component from '../../core/Component';
-import TrackItem from './TrackItem';
 
 class TrackList extends Component<TrackData> {
   constructor(private tracks: TrackData) {
@@ -8,10 +7,6 @@ class TrackList extends Component<TrackData> {
   }
 
   getTemplate() {
-    const tracksHTML = this.tracks.tracks.map((track: Track) =>
-      new TrackItem(track).getTemplate()
-    );
-
     return `
     <main class="main">
         <section
@@ -81,7 +76,6 @@ class TrackList extends Component<TrackData> {
               </div>
             </div>
             <ul class="tracks__list">
-             ${tracksHTML.join('')}
             </ul>
           </div>
         </section>
@@ -276,6 +270,21 @@ class TrackList extends Component<TrackData> {
         </section>
       </main>
     `;
+  }
+
+  public addTrackElement(trackElement: HTMLElement): void {
+    // Убедимся, что элемент создан
+    if (!this.element) {
+      console.error('TrackList element not created yet');
+      return;
+    }
+
+    const tracksList = this.element.querySelector('.tracks__list');
+    if (tracksList) {
+      tracksList.appendChild(trackElement);
+    } else {
+      console.error('.tracks__list not found in TrackList');
+    }
   }
 }
 

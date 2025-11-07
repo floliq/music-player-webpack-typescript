@@ -10,7 +10,7 @@ class TrackItem extends Component<Track> {
   getTemplate() {
     return `
         <li class="tracks__item flex">
-            <div class="tracks__item__number">1</div>
+            <div class="tracks__item__number">${this.item.id}</div>
             <div class="tracks__item__name">
                 <img
                 class="track__img"
