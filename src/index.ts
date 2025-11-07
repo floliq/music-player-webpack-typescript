@@ -4,6 +4,7 @@ import Player from './components/Player';
 import Playlists from './components/Playlists';
 import Sidebar from './components/Sidebar';
 import TrackList from './components/Tracks/TrackList';
+import { append, prepend } from './core/render';
 
 import {
   generateHeaderData,
@@ -33,11 +34,15 @@ const initApp = () => {
 
   const contentWrap = document.createElement('div');
   contentWrap.className = 'content-wrap flex';
-  contentWrap.append(sidebar.getElement(), trackList.getElement());
+  append(contentWrap, sidebar);
+  append(contentWrap, trackList);
 
-  overWrapper.append(header.getElement(), contentWrap, player.getElement());
+  append(overWrapper, header);
+  append(overWrapper, contentWrap);
+  append(overWrapper, player);
 
-  document.body.prepend(playlist.getElement(), overWrapper);
+  prepend(document.body, playlist);
+  prepend(document.body, overWrapper);
 };
 
 initApp();
